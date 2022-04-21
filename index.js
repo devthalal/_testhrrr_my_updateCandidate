@@ -9,6 +9,14 @@ import { getBody, getDB, sendResponse, shieldApi } from "./utils.js";
  */
 const updateCandidate = async (req, res) => {
   try {
+
+    if (req.params["health"] === "health") {
+      return sendResponse(res, 200, {
+        success: true,
+        msg: "Health check success",
+      });
+    }
+
     const DB_FILE = path.resolve("../localdb.json");
     const localDBData = getDB(DB_FILE);
     const { id, ...updateData } = await getBody(req);
@@ -33,4 +41,4 @@ const updateCandidate = async (req, res) => {
   }
 };
 
-export default { updateCandidate };
+export default updateCandidate;
